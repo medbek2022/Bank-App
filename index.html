@@ -4,9 +4,99 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
-    <div class="test"></div>
+    <!-- Navigation Bar -->
+    <nav id="nav-bar">
+      <p class="welcome">Log in to get started</p>
+      <img class="logo" src="logo.png" alt="logo" />
+      <form class="login">
+        <input type="text" class="login-input user-input" placeholder="user" />
+
+        <input
+          type="text"
+          placeholder="PIN"
+          class="login-input user-input"
+          maxlength="4"
+        />
+        <button type="button" class="login-btn">&rarr;</button>
+      </form>
+    </nav>
+
+    <!-- Bankist App -->
+    <div id="main_container">
+      <!-- Header Balance  -->
+      <div class="balance">
+        <div class="main">
+          <p>Current balance</p>
+        </div>
+        <p class="balance-value">1500€</p>
+      </div>
+
+      <!-- Movements -->
+      <div class="movements">
+        <div class="row">
+          <p class="type"><span class="index">1</span> Deposit</p>
+          <p class="amount">1500€</p>
+        </div>
+      </div>
+
+      <!-- In And Out -->
+      <div class="inAndOut">
+        <p class="in">IN &nbsp<span class="inValue">1500€</span></p>
+
+        <p class="out">OUT &nbsp <span class="outValue">500€</span></p>
+
+        <p class="intr">INTEREST &nbsp<span class="intrValue">100€</span></p>
+      </div>
+
+      <!-- Transfer Money -->
+      <div class="transfer">
+        <p class="form-header">Transfer money</p>
+        <div class="container">
+          <input class="input-form reciever" type="text" name="" id="" />
+          <p class="transferTo">Transfer To</p>
+          <input class="input-form amount-value" type="number" name="" id="" />
+          <p class="amount">Amount</p>
+          <button class="form-btn" type="button">&rarr;</button>
+        </div>
+      </div>
+
+      <!-- Request Loan -->
+      <div class="request-loan">
+        <p class="form-header">Request loan</p>
+        <div class="container">
+          <input class="input-form loan-value" type="number" id="" />
+          <p class="amount">Amount</p>
+          <button class="form-btn" type="button">&rarr;</button>
+        </div>
+      </div>
+
+      <!-- Close account -->
+      <div class="close-account">
+        <p class="form-header">Close account</p>
+        <div class="container">
+          <input class="input-form user-input" type="text" name="" id="" />
+          <p class="user">Confirm user</p>
+          <input class="input-form pin-input" type="text" name="" id="" />
+          <p class="pin">Confirm PIN</p>
+          <button class="form-btn" type="button">&rarr;</button>
+        </div>
+      </div>
+
+      <!-- Log-Out -->
+      <div class="log-out">
+        <p>You will be logged out in <span class="time-left">05:00</span></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
