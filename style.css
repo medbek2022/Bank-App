@@ -15,6 +15,7 @@ body {
 
 .hidden {
   opacity: 0;
+  transition: opacity 10s ease;
 }
 
 .form-btn {
@@ -34,6 +35,7 @@ body {
   border-radius: 10px;
   text-align: center;
   font-size: 1.2rem;
+  padding: 0px 6px;
   background: rgba(255, 255, 255, 0.4);
 }
 
@@ -93,11 +95,12 @@ body {
 #main_container {
   max-width: 1000px;
   margin: auto;
-  height: 80vh;
+  height: 71.25vh;
   padding: 1rem 2rem;
   text-align: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  opacity: 0;
 }
 #main_container .balance {
   grid-column: 1/4;
@@ -110,30 +113,37 @@ body {
   font-size: 1.7rem;
   font-weight: 500;
 }
-#main_container .balance .balance-value {
+#main_container .balance .balance_value {
   font-size: 3rem;
   font-weight: 500;
 }
 #main_container .movements {
-  background-color: red;
   grid-column: 1/3;
   grid-row: 2/5;
   background-color: white;
-  border-radius: 10px 0px 0px 0px;
+  border-radius: 15px 10px 0px 15px;
   margin-right: 1rem;
+  overflow: auto;
 }
 #main_container .movements .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 0.1px solid rgb(238, 235, 235);
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
 }
 #main_container .movements .type {
-  width: 100px;
-  border-radius: 10px;
+  border-radius: 50px;
   color: white;
-  background: linear-gradient(to right, rgb(75, 185, 75), rgb(16, 174, 16));
+  padding: 0.2rem;
+}
+#main_container .movements .green-row {
+  background: rgb(16, 174, 16);
+  width: 100px;
+}
+#main_container .movements .red-row {
+  background: rgb(237, 5, 5);
+  width: 130px;
 }
 #main_container .movements .amount {
   font-size: 1.4rem;
