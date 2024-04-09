@@ -4,21 +4,21 @@
 
 const account1 = {
   owner: 'Mohamed Bekour',
-  movements: [-100, 50, -20, 200, 500],
+  movements: [100, 680, -550, -120, 200, 500],
   interestRate: 1,
   pin: 1111,
 };
 
 const account2 = {
   owner: 'Niklas Muller',
-  movements: [200, 200, -200],
+  movements: [200, 200, -200, 500, 1200, -100],
   interestRate: 1.4,
   pin: 2222,
 };
 
 const account3 = {
   owner: 'Nicole Schune',
-  movements: [500, 850, -250, 600, -300],
+  movements: [500, -300, 850, -250, 600, -300],
   interestRate: 0.7,
   pin: 3333,
 };
@@ -78,9 +78,11 @@ const generateUserNames = function (accounts) {
 // ---------- Timer Log Out -----------
 // log out the Current logged in User
 const logOutUser = function () {
+  clearInterval(timer);
   currAcc = '';
   mainContainer.style.transition = '';
   mainContainer.style.opacity = '0';
+  welcome.textContent = 'Log in to get started';
 };
 //
 const convertSeconds = function (seconds) {
@@ -95,11 +97,11 @@ const convertSeconds = function (seconds) {
 };
 
 const logOutTimer = function () {
-  let time = 299;
+  let t = 299;
   timer = setInterval(function () {
-    timeLeft.textContent = convertSeconds(time);
-    time--;
-    if (time === 0) logOutUser();
+    timeLeft.textContent = convertSeconds(t);
+    t--;
+    if (t === 0) logOutUser();
   }, 1000);
 };
 // calculate and display The balance balance
@@ -189,10 +191,10 @@ const closeAccount = function (e) {
     );
     // delete the Account
     accounts.splice(indexAccountToRemove, 1);
-    console.log(accounts);
     // hide the UI without Less Transition
     mainContainer.style.transition = 'opacity 0.3s ease';
     mainContainer.style.opacity = 0;
+    welcome.textContent = 'Log in to get started';
   } else {
     closeBlock.style.opacity = '0.6';
   }
@@ -266,8 +268,11 @@ const checkUser = function (e) {
 
   // generate User Names
   generateUserNames(accounts);
+  // Check if the timer is already Running
+  if (timer !== null) {
+    clearInterval(timer);
+  }
   // start the log out Timer
-  clearInterval(timer);
   timeLeft.textContent = '05:00';
   logOutTimer();
   // get the current account
