@@ -61,6 +61,7 @@ console.log(timeLeft);
 
 // Some Global Variables
 let currAcc;
+let timer;
 
 // -------------------- Functions -------------------------
 
@@ -95,7 +96,7 @@ const convertSeconds = function (seconds) {
 
 const logOutTimer = function () {
   let time = 299;
-  setInterval(function () {
+  timer = setInterval(function () {
     timeLeft.textContent = convertSeconds(time);
     time--;
     if (time === 0) logOutUser();
@@ -107,7 +108,6 @@ const displayBalance = function getBalance(currAcc) {
   currAcc.balance = balance;
   balance_value.textContent = balance + '€';
 };
-console.log();
 // calculate and display the sum of all the deposits
 const displayDepositsSum = function (currAcc) {
   const sum = currAcc.movements
@@ -267,6 +267,8 @@ const checkUser = function (e) {
   // generate User Names
   generateUserNames(accounts);
   // start the log out Timer
+  clearInterval(timer);
+  timeLeft.textContent = '05:00';
   logOutTimer();
   // get the current account
   currAcc = accounts.find(acc => acc.userName === user.value);
