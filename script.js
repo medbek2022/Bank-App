@@ -55,6 +55,10 @@ const loanBlock = document.querySelector('.request-loan');
 const loanAmount = loanBlock.querySelector('.loan-value');
 const loanBtn = loanBlock.querySelector('.form-btn');
 
+// Timer
+const timeLeft = document.querySelector('.time-left');
+console.log(timeLeft);
+
 // Some Global Variables
 let currAcc;
 
@@ -70,14 +74,40 @@ const generateUserNames = function (accounts) {
       .join('');
   });
 };
+// ---------- Timer Log Out -----------
+// log out the Current logged in User
+const logOutUser = function () {
+  currAcc = '';
+  mainContainer.style.transition = '';
+  mainContainer.style.opacity = '0';
+};
+//
+const convertSeconds = function (seconds) {
+  const minutesLeft = Number.parseInt(seconds / 60);
+  const secondsLeft = Number.parseInt(seconds % 60);
 
+  let secondsLeftWithZero = secondsLeft.toString();
+  if (secondsLeftWithZero.length === 1) {
+    secondsLeftWithZero = `0${secondsLeftWithZero}`;
+  }
+  return `0${minutesLeft}:${secondsLeftWithZero}`;
+};
+
+const logOutTimer = function () {
+  let time = 299;
+  setInterval(function () {
+    timeLeft.textContent = convertSeconds(time);
+    time--;
+    if (time === 0) logOutUser();
+  }, 1000);
+};
 // calculate and display The balance balance
 const displayBalance = function getBalance(currAcc) {
   const balance = currAcc.movements.reduce((sum, mov) => sum + mov, 0);
   currAcc.balance = balance;
   balance_value.textContent = balance + '€';
 };
-
+console.log();
 // calculate and display the sum of all the deposits
 const displayDepositsSum = function (currAcc) {
   const sum = currAcc.movements
@@ -176,13 +206,15 @@ const requestLoan = function (e) {
     loan > 0 &&
     currAcc.movements.some(mov => mov > 0 && mov >= LoanPercentage)
   ) {
-    currAcc.movements.push(loan);
-    // update The UI
-    loanAmount.value = '';
-    displayBalance(currAcc);
-    displayMovements(currAcc);
-    displayDepositsSum(currAcc);
-    displayInterest(currAcc);
+    setTimeout(function () {
+      // update The UI
+      currAcc.movements.push(loan);
+      loanAmount.value = '';
+      displayBalance(currAcc);
+      displayMovements(currAcc);
+      displayDepositsSum(currAcc);
+      displayInterest(currAcc);
+    }, 1000);
   } else {
     loanBlock.style.opacity = '0.6';
   }
@@ -234,7 +266,8 @@ const checkUser = function (e) {
 
   // generate User Names
   generateUserNames(accounts);
-
+  // start the log out Timer
+  logOutTimer();
   // get the current account
   currAcc = accounts.find(acc => acc.userName === user.value);
 
@@ -271,13 +304,3 @@ const checkUser = function (e) {
     pin.style.border = '1px solid red';
   }
 };
-
-// Chalanges
-
-const test = accounts.flatMap(acc => acc.movements);
-console.log(test);
-
-const overBalance = test.reduce(function (acc, mov) {
-  return acc + mov;
-}, 5);
-console.log(overBalance);
